@@ -32,6 +32,10 @@ These problems are tricky and require some insight into how to solve them, but t
 Using the Library
 -----------------
 
+To get the library: ::
+
+        pip install knight-dialer
+
 The library contains three possible solutions to the problem.  The first is a pure recursive solution.  That is, the function calls itself down the number of dials, and then returns the answer back up.  The second is a method that calls itself but doesn't return the answer.  Instead when it gets to the bottom it appends the finished work ot a list and returns that instead of itself.  The final one is my personal recommendation for how to solve these kinds of problems in a no-stress way: a backtracking/todo system (as seen in my other library chemify).  In this case, you add the initial items to a todo list, process each node, and then return the answer back to the todo list if it isn't done yet, or to a 'done' list if it is.  Once you have nothing on your todo list, return your done list.
 
 IDES
