@@ -54,8 +54,8 @@ def KD_recursive_addition(todo,total_length=7):
     method to directly return the answer from dial, you'll find that you 
     get a nested answer n layers deep, where each level of the array holds
     more close answers.  E.g. [[[1,6,1],[1,6,7],[1,6,0]],[[1,8,1],[1,8,3]]] 
-    which is not what you want.  You could in principle reshape the data with
-    numpy, but that's another story for another day.
+    which is not what you want.  (You could in principle reshape the data with
+    numpy, but that's another story for another day.)
     
     """
     done=[] #start an empty done list
@@ -96,7 +96,7 @@ def KD_backtrack(todo,total_length=7):
     This method has the advantage that it is more easily debugged: just 
     print out the todo list to file and you'll get an accurate idea of what 
     is going on. My advice is figure out how this version works, and then 
-    use that to solve any recursive interview questions you may encounter.
+    use that to solve any recursive problems you may encounter.
     """
     done=[] # done list starts empty
     while len(todo)>0: # while we still have an item on the todo list
@@ -110,7 +110,7 @@ def KD_backtrack(todo,total_length=7):
 
 
 
-
+# if you run this file directly, you will get a speed test of the three functions
 if __name__ == '__main__':
     try:
         import matplotlib.pyplot as plt
@@ -120,20 +120,21 @@ if __name__ == '__main__':
         print('if you want to run the tests and show the results, you\'ll need matplotlib and numpy installed')
 
     else:
-        trad = []
         tpur = []
+        trad = []
         tbac = []
         for j in range(2,15):
-            t = time.time()
-            rad = KD_recursive_addition([[1],[2],[3],[4],[6],[7],[8],[9]],total_length=j)
-            t = time.time()-t
-            trad.append(t)  
-            del t
     
             t = time.time()
             pur = KD_pure_recursion([[1],[2],[3],[4],[6],[7],[8],[9]],total_length=j)
             t = time.time()-t
             tpur.append(t)  
+            del t
+            
+            t = time.time()
+            rad = KD_recursive_addition([[1],[2],[3],[4],[6],[7],[8],[9]],total_length=j)
+            t = time.time()-t
+            trad.append(t)  
             del t
             
             t = time.time()        
@@ -146,14 +147,12 @@ if __name__ == '__main__':
             assert pur.sort() == rad.sort()
         
         plt.figure()
-        plt.plot(np.log(trad[2:]),label='recursive addition')
         plt.plot(np.log(tpur[2:]),label='pure recursion')
+        plt.plot(np.log(trad[2:]),label='recursive addition')
         plt.plot(np.log(tbac[2:]),label='backtrack')
         plt.legend()
         plt.xlabel('length of dial'); plt.ylabel('ln(time)')
         plt.show()
-
-#%%
     
     
     
